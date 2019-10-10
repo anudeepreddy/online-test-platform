@@ -1,0 +1,16 @@
+.table-responsive.flex-grow-0.flex-shrink-0 {
+  table-layout: fixed;
+}
+
+.table td, .table th {
+  table-layout: fixed;
+}
+
+.btn {
+  /*padding-left: 10px;*/
+}
+
+.container {
+  height: 100%;
+}
+

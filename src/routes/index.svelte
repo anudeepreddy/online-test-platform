@@ -1,6 +1,5 @@
 <script context="module">
-  export async function preload({params}, {user}) {
-    console.log(user)
+  export async function preload({params}, {user}) {  
     if (!user) {
       return this.redirect(302, "login");
     }
@@ -8,13 +7,21 @@
 </script>
 
 <script>
-  import { stores } from "@sapper/app";
+  import { stores,goto } from "@sapper/app";
   import Sidebar from "../components/Sidebar.svelte";
   import Topnav from "../components/Topnav.svelte";
   import Footer from "../components/Footer.svelte";
+  import { post } from "utils.js"
   const {session} = stores();
-  console.log('index.svelte');
-  console.log($session);
+  async function handleFunction(event){
+    if(event.detail.function=='logout'){
+      const response = await post('/auth/logout');
+        if(response.status){
+          $session.user = null;
+          goto(response.redirect);
+        }
+    }
+  }
   const graph = {
     type: "line",
     data: {
@@ -102,7 +109,7 @@
     <Sidebar />
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
-        <Topnav />
+        <Topnav on:message={handleFunction}/>
         <div class="container-fluid">
           <div
             class="d-sm-flex justify-content-between align-items-center mb-4">

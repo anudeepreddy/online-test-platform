@@ -1,11 +1,14 @@
 <script>
   import { post } from "utils.js";
-  import { login } from "../auth/login.js";
   import { stores, goto } from "@sapper/app";
   const { session } = stores();
   let username, password;
   async function handleLogin() {
-    const response = await login(username, password);
+    const data = {
+      username: username,
+      password: password
+    }
+    const response = await post('/auth/login',data);
     if (response.user) {
       $session.user = response.user;
       goto("/");

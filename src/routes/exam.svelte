@@ -1,10 +1,15 @@
+<script context="module">
+  export async function preload({params}, {user}) {  
+    if (!user) {
+      return this.redirect(302, "login");
+    }
+  }
+</script>
 <script>
   import Topnav from "../components/Topnav.svelte";
   import Footer from "../components/Footer.svelte";
   import { questions, answers } from "../stores/exam.js";
   import {stores} from "@sapper/app";
-  const {session} = stores();
-  console.log($session);
   var countDownDate = new Date("Oct 31, 2019 22:37:25").getTime();
   var time = "0:00:00";
   var Active = {
@@ -15,7 +20,6 @@
     console.log($answers);
   }
   var len = $questions.length;
-  console.log($questions[0].no);
   function changeActive(qN) {
     for (let i = 0; i < len; i++) {
       if ($questions[i].no == qN) {

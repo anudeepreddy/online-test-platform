@@ -233,14 +233,14 @@
           <div
             class="dropdown-menu shadow dropdown-menu-right animated--grow-in"
             role="menu">
-            <a class="dropdown-item" role="presentation" href="/profile.html">
+            <a class="dropdown-item" role="presentation" href="/profile">
               <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
               &nbsp;Profile
             </a>
-            <a class="dropdown-item" role="presentation" href=".">
+            <!--<a class="dropdown-item" role="presentation" href=".">
               <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
               &nbsp;Settings
-            </a>
+            </a>-->
             <a class="dropdown-item" role="presentation" href=".">
               <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
               &nbsp;Activity log

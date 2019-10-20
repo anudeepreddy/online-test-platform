@@ -8,9 +8,11 @@
 
 <script>
   import { stores,goto } from "@sapper/app";
-  import Sidebar from "../components/Sidebar.svelte";
-  import Topnav from "../components/Topnav.svelte";
-  import Footer from "../components/Footer.svelte";
+  import Sidebar from "../components/Sidebar";
+  import Topnav from "../components/Topnav";
+  import Footer from "../components/Footer";
+  import PerformanceChart from "../components/charts/Performance";
+  import SWPerformanceChart from "../components/charts/SWPerformance"
   import { post } from "utils.js"
   const {session} = stores();
   async function handleFunction(event){
@@ -22,83 +24,43 @@
         }
     }
   }
-  const graph = {
-    type: "line",
-    data: {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+  const PerformanceData = {
+      labels: ["Test1", "Test2", "Test3", "Test4", "Test5", "Test6", "Test7", "Test8"],
       datasets: [
         {
-          label: "Earnings",
+          label: "Mathematics",
           fill: true,
-          data: [
-            "0",
-            "10000",
-            "5000",
-            "15000",
-            "10000",
-            "20000",
-            "15000",
-            "25000"
-          ],
+          data: [120,110,56,78,100,89,66,85],
           backgroundColor: "rgba(78, 115, 223, 0.05)",
           borderColor: "rgba(78, 115, 223, 1)"
+        },
+        {
+          label: "Physics",
+          fill: true,
+          data: [50,110,89,45,66,120,77,77],
+          backgroundColor: "rgba(255,0,80,0.05)",
+          borderColor: "rgba(255,0,80,1)"
+        },
+        {
+          label: "Chemistry",
+          fill: true,
+          data: [100,120,110,78,23,10,45,56],
+          backgroundColor: "rgba(255,235,80,0.05)",
+          borderColor: "rgba(255,235,80,1)"
         }
       ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      legend: { display: false },
-      title: {},
-      scales: {
-        xAxes: [
-          {
-            gridLines: {
-              color: "rgb(234, 236, 244)",
-              zeroLineColor: "rgb(234, 236, 244)",
-              drawBorder: false,
-              drawTicks: false,
-              borderDash: ["2"],
-              zeroLineBorderDash: ["2"],
-              drawOnChartArea: false
-            },
-            ticks: { fontColor: "#858796", padding: 20 }
-          }
-        ],
-        yAxes: [
-          {
-            gridLines: {
-              color: "rgb(234, 236, 244)",
-              zeroLineColor: "rgb(234, 236, 244)",
-              drawBorder: false,
-              drawTicks: false,
-              borderDash: ["2"],
-              zeroLineBorderDash: ["2"]
-            },
-            ticks: { fontColor: "#858796", padding: 20 }
-          }
-        ]
-      }
-    }
-  };
-  const pie = {
-    type: "doughnut",
-    data: {
-      labels: ["Direct", "Social", "Referral"],
+    };
+    const SWPerformanceData = {
+      labels: ["Physics", "Chemisrty", "Mathematics"],
       datasets: [
         {
           label: "",
           backgroundColor: ["#4e73df", "#1cc88a", "#36b9cc"],
           borderColor: ["#ffffff", "#ffffff", "#ffffff"],
-          data: ["50", "30", "15"]
+          data: ["56", "30", "15"]
         }
       ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      legend: { display: false },
-      title: {}
-    }
-  };
+    };  
 </script>
 
 <svelte:head>
@@ -225,104 +187,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-7 col-xl-8">
-              <div class="card shadow mb-4">
-                <div
-                  class="card-header d-flex justify-content-between
-                  align-items-center">
-                  <h6 class="text-primary font-weight-bold m-0">Performance</h6>
-                  <div class="dropdown no-arrow">
-                    <button
-                      class="btn btn-link btn-sm dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      type="button">
-                      <i class="fas fa-ellipsis-v text-gray-400" />
-                    </button>
-                    <div
-                      class="dropdown-menu shadow dropdown-menu-right
-                      animated--fade-in"
-                      role="menu">
-                      <p class="text-center dropdown-header">
-                        dropdown header:
-                      </p>
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Action
-                      </a>
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Another action
-                      </a>
-                      <div class="dropdown-divider" />
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Something else here
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas data-bs-chart={JSON.stringify(graph)} />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-5 col-xl-4">
-              <div class="card shadow mb-4">
-                <div
-                  class="card-header d-flex justify-content-between
-                  align-items-center">
-                  <h6 class="text-primary font-weight-bold m-0">
-                    Subject wise performance
-                  </h6>
-                  <div class="dropdown no-arrow">
-                    <button
-                      class="btn btn-link btn-sm dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      type="button">
-                      <i class="fas fa-ellipsis-v text-gray-400" />
-                    </button>
-                    <div
-                      class="dropdown-menu shadow dropdown-menu-right
-                      animated--fade-in"
-                      role="menu">
-                      <p class="text-center dropdown-header">
-                        dropdown header:
-                      </p>
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Action
-                      </a>
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Another action
-                      </a>
-                      <div class="dropdown-divider" />
-                      <a class="dropdown-item" role="presentation" href=".">
-                        &nbsp;Something else here
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas data-bs-chart={JSON.stringify(pie)} />
-                  </div>
-                  <div class="text-center small mt-4">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary" />
-                      &nbsp;Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success" />
-                      &nbsp;Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info" />
-                      &nbsp;Refferal
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PerformanceChart data={PerformanceData}/>
+            <SWPerformanceChart data={SWPerformanceData}/>
           </div>
           <div class="row">
             <div class="col-lg-6 mb-4">
@@ -387,23 +253,4 @@
       <i class="fas fa-angle-up" />
     </a>
   </div>
-  <script src="/assets/js/jquery.min.js">
-
-  </script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js">
-
-  </script>
-  <script src="/assets/bootstrap/js/bootstrap.min.js">
-
-  </script>
-  <script src="/assets/js/chart.min.js">
-
-  </script>
-  <script src="/assets/js/bs-charts.js">
-
-  </script>
-  <script src="/assets/js/theme.js">
-
-  </script>
 </body>

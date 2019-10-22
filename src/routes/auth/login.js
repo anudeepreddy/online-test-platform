@@ -12,9 +12,13 @@ export function post(req, res) {
 	const user = req.body;
 
 	api.post('user/login', user).then(response => {
-		if (response.user) req.session.user = response.user;
-		res.setHeader('Content-Type', 'application/json');
-
-		res.end(JSON.stringify(response));
-	});
+		if (response==undefined){
+			res.end(JSON.stringify({status: false}));
+		}
+		else{
+			req.session.user = response.user;
+			res.setHeader('Content-Type', 'application/json');
+			res.end(JSON.stringify(response));
+		}
+	})
 }

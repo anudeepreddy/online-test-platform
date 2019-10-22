@@ -3,16 +3,24 @@
   import { stores, goto } from "@sapper/app";
   const { session } = stores();
   let username, password;
+  $: login = true;
+  $: error = false;
   async function handleLogin() {
+    login=false;
     const data = {
       username: username,
       password: password
     }
-    const response = await post('/auth/login',data);
-    if (response.user) {
-      $session.user = response.user;
-      goto("/");
-    }
+      const response = await post('/auth/login',data);
+      if (response.status==false) {
+        login = true;
+        error = true;
+        setTimeout(function(){ error = false; }, 5000);   
+      }
+      else{
+        $session.user = response.user;
+        goto("/");
+      }
   }
 </script>
 
@@ -68,10 +76,18 @@
                         </div>
                       </div>
                     </div>
+                    {#if error}
+                    <div class="alert alert-warning" role="alert">
+                      Oops! Something went wrong, Please Try Again
+                    </div>
+                    {/if}
                     <button
                       class="btn btn-primary btn-block text-white btn-user"
                       on:click|preventDefault={handleLogin}>
+                      {#if !login}<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>{/if}
+                      {#if login}
                       Login
+                      {/if}
                     </button>
                     <hr />
                   </form>

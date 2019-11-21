@@ -6,4 +6,3 @@ yarn-error.log
 /__sapper__/
 /.sessions/
 vscode.code-workspace
-/src/node_modules

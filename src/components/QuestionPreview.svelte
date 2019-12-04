@@ -11,27 +11,26 @@
         </button>
       </div>
       <div class="modal-body">
-      Question: {data.question}<br>
+      Question: {@html data.question}<br>
         <label>
-	    <input type=checkbox bind:group={data.correctAnswer} value="1">
-	        {data.otp1}
-        </label>
+	      <input type=checkbox  value="1" bind:group={data.correctAnswer}>
+	        {@html data.option1}
+        </label><br>
         <label>
-	    <input type=checkbox bind:group={data.correctAnswer} value="2">
-	        {data.otp2}
-        </label>
+	    <input type=checkbox  value="2" bind:group={data.correctAnswer}>
+	        {@html data.option2}
+        </label><br>
         <label>
-	    <input type=checkbox bind:group={data.correctAnswer} value="3">
-	        {data.otp3}
-        </label>
+	    <input type=checkbox  value="3" bind:group={data.correctAnswer}>
+	        {@html data.option3}
+        </label><br>
         <label>
-	    <input type=checkbox bind:group={data.correctAnswer} value="4">
-	        {data.otp4}
-        </label>  
+	    <input type=checkbox  value="4" bind:group={data.correctAnswer}>
+	        {@html data.option4}
+        </label><br>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

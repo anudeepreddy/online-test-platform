@@ -11,12 +11,8 @@
       CKEDITOR.replace( 'opt3editor' );
       CKEDITOR.replace( 'opt4editor' );
     });
-    var data={correctAnswer:1};
+    var data={correctAnswer:"1"};
     var units=[{id:0,name:"sample unit1"},{id:1,name:"sample unit2"},{id:2,name:"sample unit3"}];
-    var preview=false;
-    function previewState(){
-      preview = !preview;
-    }
     function fetchUnits(){
       units=[{id:0,name:"sample unit1"},{id:1,name:"sample unit2"}]
     }
@@ -209,7 +205,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#previewModel">Preview</button>
+                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#previewModel" on:click={previewQuestion}>Preview</button>
                         <button class="btn btn-primary" type="button">Submit</button>
                     </div>
                 </div>

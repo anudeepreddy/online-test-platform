@@ -16,6 +16,9 @@
     function fetchUnits(){
       units=[{id:0,name:"sample unit1"},{id:1,name:"sample unit2"}]
     }
+    function handleSubmit(){
+        //todo
+    }
     function previewQuestion(){
       data.question=CKEDITOR.instances.questioneditor.getData();
       data.option1=CKEDITOR.instances.opt1editor.getData();
@@ -30,11 +33,21 @@
   .btn{
     margin-right: 16px;
   }
+  .col-10-adj{
+      max-width: 10%;
+  }
+  .container-fluid{
+      max-width: 100%;
+  }
+  label{
+      font-weight: bold;
+      font-size:20px;
+  }
 </style>
 
 
 <svelte:head>
-  <title>Create Question</title>
+  <title>Question</title>
 </svelte:head>
 
 <body id="page-top">
@@ -45,6 +58,8 @@
               <Topnav />
             <div class="container-fluid">
             <QuestionPreview data={data} />
+            <div class="card">
+                <div class="card-body">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -126,9 +141,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Question</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Question</label></div>
                                 <div class="col"><textarea name="questioneditor" id="questioneditor"></textarea></div>
                             </div>
                         </div>
@@ -138,9 +151,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Option A</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Option A</label></div>
                                 <div class="col"><textarea name="opt1editor" id="opt1editor"></textarea></div>
                             </div>
                         </div>
@@ -150,9 +161,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Option B</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Option B</label></div>
                                 <div class="col"><textarea name="opt2editor" id="opt2editor"></textarea></div>
                             </div>
                         </div>
@@ -162,9 +171,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Option C</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Option C</label></div>
                                 <div class="col"><textarea name="opt3editor" id="opt3editor"></textarea></div>
                             </div>
                         </div>
@@ -174,9 +181,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Option D</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Option D</label></div>
                                 <div class="col"><textarea name="opt4editor" id="opt4editor"></textarea></div>
                             </div>
                         </div>
@@ -186,9 +191,7 @@
                     <div class="col">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col"><label class="col-form-label">Correct Answer</label></div>
-                            </div>
-                            <div class="row">
+                                <div class="col col-10-adj"><label class="col-form-label">Correct Answer</label></div>
                                 <div class="col">
                                   <select bind:value={data.correctAnswer}>
                                     <optgroup label="Select Correct Answer">
@@ -206,10 +209,12 @@
                 <div class="row">
                     <div class="col">
                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#previewModel" on:click={previewQuestion}>Preview</button>
-                        <button class="btn btn-primary" type="button">Submit</button>
+                        <button class="btn btn-primary" type="button" on:click={handleSubmit}>Submit</button>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
         <Footer />
     </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
